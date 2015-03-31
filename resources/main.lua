@@ -36,7 +36,7 @@ function ballHit(event)
         balls = {event.nodeA, event.nodeB}
         
         for k,ball in pairs(balls) do
-            tween:to(ball, {xScale=2, yScale=2, alpha=0, time=0.5, onComplete=destroyBall})
+            tween:to(ball, {xScale=0, yScale=0, alpha=0, time=0.5, onComplete=destroyBall})
             
             if ball.isTarget then
                 setScore(score+1)
