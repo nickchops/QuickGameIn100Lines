@@ -10,3 +10,4 @@ iwtrace.txt
 **/code-drop/**
 MiniDump.dmp
 *.bak
+mobdebug.lua
