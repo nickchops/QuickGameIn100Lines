@@ -16,7 +16,7 @@ setDefaultSize(sky, appWidth, appHeight)
 tween:from(sky, {alpha=0, time=1})
 local score = 0
 local scoreBg = director:createRectangle({x=appWidth/2-70, y=appHeight-90, w=140, h=50, color=color.black, zOrder=1})
-local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, sCale=2, yScale=2})
+local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, xScale=2, yScale=2})
 
 function setScore(val)
     score = val
@@ -45,14 +45,14 @@ function ballHit(event)
     end
 end
 
-events ={}
+local events ={}
 function events.orientation()
     vr:update()
     vr:applyToScene(director:getCurrentScene())
-    ballMinX = vr.userWinMinX - ballRadius
-    ballMaxX = vr.userWinMaxX + ballRadius
-    ballMinY = vr.userWinMinY - ballRadius
-    ballMaxY = vr.userWinMaxY + ballRadius
+    ballMinX = vr.userWinMinX - ballRadius*2
+    ballMaxX = vr.userWinMaxX + ballRadius*2
+    ballMinY = vr.userWinMinY - ballRadius*2
+    ballMaxY = vr.userWinMaxY + ballRadius*2
 end
 events.orientation()
 
@@ -73,8 +73,8 @@ function events:touch(event)
         local ball = director:createSprite({x=appWidth/2, y=-ballRadius, source="beachball.png", xAnchor=0.5, yAnchor=0.5, color=color.red})
         setDefaultSize(ball, 60)
         physics:addNode(ball, {radius=30})
-        ball:addEventListener("collision", ballHit)
         ball.physics:setLinearVelocity((x-appWidth/2)*2,y*2)
+        ball:addEventListener("collision", ballHit)
         table.insert(balls, ball)
     end
 end
